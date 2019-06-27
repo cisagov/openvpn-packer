@@ -3,14 +3,31 @@
 [![Build Status](https://travis-ci.com/cisagov/openvpn-packer.svg?branch=develop)](https://travis-ci.com/cisagov/openvpn-packer)
 
 This is a generic skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) GitHub project started.
-This skeleton project contains [licensing information](LICENSE.md), as
-well as [pre-commit hooks](https://pre-commit.com) and a [Travis
+new [cisagov](https://github.com/cisagov) GitHub
+[packer](https://packer.io) project started.  This skeleton project
+contains [licensing information](LICENSE), as well as [pre-commit
+hooks](https://pre-commit.com) and a [Travis
 CI](https://travis-ci.com) configuration appropriate for the major
 languages that we use.
 
-In many cases you will instead want to use one of the more specific
-skeleton projects derived from this one.
+## Building the Image ##
+
+The AMI is built like so:
+
+```bash
+ansible-galaxy install --force --role-file src/requirements.yml
+```
+
+### Required Environment Variables ###
+
+- `AWS_ACCESS_KEY`: the access key ID of the building IAM. e.g., `AKIAXXXXXXXXXXXXXXXX`
+- `AWS_SECRET_KEY`: the secret key of the building IAM e.g., `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
+- `BUILD_REGION`: the region to build the build the image in.  e.g., `us-east-2`
+- `DEPLOY_REGIONS`: list of additional regions to deploy this image. e.g., `us-east-1,us-west-1,us-west-2`
+
+```bash
+packer build src/packer.json
+```
 
 ## Contributing ##
 
@@ -19,7 +36,7 @@ details.
 
 ## License ##
 
-This project is in the worldwide [public domain](LICENSE.md).
+This project is in the worldwide [public domain](LICENSE).
 
 This project is in the public domain within the United States, and
 copyright and related rights in the work worldwide are waived through
