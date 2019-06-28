@@ -1,4 +1,4 @@
-# openvpn-packer #
+# openvpn-packer 🚪📦
 
 [![Build Status](https://travis-ci.com/cisagov/openvpn-packer.svg?branch=develop)](https://travis-ci.com/cisagov/openvpn-packer)
 
@@ -10,7 +10,7 @@ hooks](https://pre-commit.com) and a [Travis
 CI](https://travis-ci.com) configuration appropriate for the major
 languages that we use.
 
-## Building the Image ##
+## Building the Image
 
 The AMI is built like so:
 
@@ -18,7 +18,7 @@ The AMI is built like so:
 ansible-galaxy install --force --role-file src/requirements.yml
 ```
 
-### Required Environment Variables ###
+### Required Environment Variables
 
 - `AWS_ACCESS_KEY`: the access key ID of the building IAM. e.g., `AKIAXXXXXXXXXXXXXXXX`
 - `AWS_SECRET_KEY`: the secret key of the building IAM e.g., `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
@@ -29,12 +29,12 @@ ansible-galaxy install --force --role-file src/requirements.yml
 packer build src/packer.json
 ```
 
-## Contributing ##
+## Contributing
 
 We welcome contributions!  Please see [here](CONTRIBUTING.md) for
 details.
 
-## License ##
+## License
 
 This project is in the worldwide [public domain](LICENSE).
 
