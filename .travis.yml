@@ -33,6 +33,7 @@ env:
         fqQ8bDKxafJatOVN4hyYhbVn4UN//U2thSGMu0t20kjIIDFIodRlCGTVXWLyxN7NPMp
         7QGm04M3ZRyYkZgof0UkSaCJLB6ClZS1AfK4RSeuiUBAi4b8n/R/RNuzwpHoLyJSix7
         QIukSTRw5n6t4=
+    # GITHUB_ACCESS_TOKEN
     - PACKER_BUILD_REGION="us-east-2"
     - PACKER_DEPLOY_REGIONS="us-east-1,us-west-1,us-west-2"
     - PACKER_VERSION="1.4.2"
@@ -61,11 +62,11 @@ before_install:
 install:
   - pip install --upgrade --requirement requirements-test.txt
   - export PACKER_IMAGE_VERSION=$(./bump_version.sh show)
-  - eval $(./update_env.py)
   # install roles
   - ansible-galaxy install --force --role-file src/requirements.yml
 
 script:
+  - eval $(./update_env.py)
   - pre-commit run --all-files
   - packer validate src/packer.json
   - pytest
