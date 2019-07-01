@@ -19,6 +19,7 @@ env:
         HBvLW+4iSTDvpBaHCVr/m53hERGkdrQa44fVZqE9cXTvCwtAa1UsmwnqbNDRdhE4Dr9
         vrAsfwXG4nKXrNmQ2nsZbbUXGqUP7i0sjXFdWD0HFo474+U6uDjtOmKcby5l+SyBnwl
         ke3/yWoyLnisA=
+    - AWS_DEFAULT_REGION="us-east-2"
     # AWS_SECRET_ACCESS_KEY
     - secure: >-
         c7Qo6tdi0ihKBHNjNMgBiCpHJdT7TIUixXCK8eHxAl4SI4Sv6Ygv/hQFzkBuk7Y3/kj
