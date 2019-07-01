@@ -6,7 +6,7 @@ python: 3.7
 services: docker
 env:
   global:
-    # AWS_ACCESS_KEY
+    # AWS_ACCESS_KEY_ID
     - secure: >-
         aEVUYy9ndzem1x+fY5R4glyWiq0ncn6UgARleZ9l8lSHTMT/ZvgHGyWd98DcSEKsFRp
         rhv2VsVAaqQCVR01Y839NeD6jKVDnakORdc4H+T5e+hhm5TY9VbTikDhX4pEMixA/+w
@@ -19,7 +19,7 @@ env:
         DncYEeG7rxoNsmqbYjAY7gZriYEvp3jxR97XjbOSvdIaFVKKb0r8Wfhmvmm8ehqao9z
         Jcl8daVD5wqR3vcXXew6rkiQ+/rkB7KwBtMh/jTKO3D6XP8K4vZbrfLcVOZYFP8bEaV
         JjWJ1PraLFhcs=
-    # AWS_SECRET_KEY
+    # AWS_SECRET_ACCESS_KEY
     - secure: >-
         XYLwd5bvFIdw9Tx/yRDhpmj8DyGx2Fv5aPjB37lNPRWEswab0YO56TjxqNTEbgcOeIW
         /kqwTJT6oQEE8TEX1xUvrpg+0WlN67kwi4MVsGb9eVAwbiLnEh3ji55JwMMGtWwxPlo
@@ -34,7 +34,6 @@ env:
         vD4IUsTftHaBs=
     - BUILD_REGION="us-east-2"
     - DEPLOY_REGIONS="us-east-1,us-west-1,us-west-2"
-    # - IMAGE_VERSION=
     - PACKER_VERSION="1.4.1"
 
 
@@ -45,6 +44,15 @@ cache:
     - $HOME/.cache/pre-commit
 
 before_install:
+  # Install terraform and terraform-doc
+  - >
+    wget
+    https://releases.hashicorp.com/terraform/0.12.3/terraform_0.12.3_linux_amd64.zip
+    -O terraform.zip
+  - sudo unzip terraform.zip -d /opt/terraform
+  - sudo ln -s /opt/terraform/terraform /usr/bin/terraform
+  - rm -f terraform.zip
+  - go get github.com/segmentio/terraform-docs
   # install packer.io
   - curl --output /tmp/packer.zip --location
       "https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip"
