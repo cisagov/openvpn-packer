@@ -34,6 +34,18 @@ env:
         7QGm04M3ZRyYkZgof0UkSaCJLB6ClZS1AfK4RSeuiUBAi4b8n/R/RNuzwpHoLyJSix7
         QIukSTRw5n6t4=
     # GITHUB_ACCESS_TOKEN
+    - secure: >-
+        Ay/LJoDrErwGyj6Blv42QF+7KehosXppPTq/W51dUx3tt4GpE+NIgwTYtGjEh2lUjzj
+        98yvsUgJBCy9luxtoT78fufJQHc0UNQW1NRzn4di+vCXxoGYADqLnYzXvCk3PCFDdUv
+        7wa+q+m3r/1z1BXMWLUsK1R0c4+w6i9O2lfWeB0bYLyKSp1RexgPrAfuYGYKxkYLGQa
+        /lyJHl3EEYNgmeOVcsqZhd5FSCKqhKHhQnwhy9iN+UgQgArKVdhcm1e/n4F4QxA2x+K
+        P3VamiQ8w5SnUZDvrs9xYuIxQxQYnCQ2B7fVFSUMbUzUbFoosfi+rsYClAoZZAkx1NO
+        AoQ0kyjB362MwFuCDMSc4qVT/Fuie4hz7M++6k55DQP4Q3s7wjx9kUE9kMCOU6UxfAY
+        PpxfSV7PQZLu4OltN+KtQjSebgdpWn/gt7NaPd8ate3gBoLeVn2YJutzefdLBF4QqHO
+        Uo+t9Yn9osTQ9AWm8DkVNKVJdk3GR8MT2Uvb48lREXOSbma28koiP4irUaTAFfTpgin
+        a0Wdi5Kmaxhi1EP0nHKZI83/u/i24Zh5i9qkGRI5sMoUdmTtK8XhSpTNS8I1wH5jvo/
+        pGSFoJBH7kbQm/3YxVklbjc9FgKtdtHRULs8LD9hLt6VfZkLZf+GmQ3SSbUE11vrbeG
+        oYEjR6VvyvMzo=
     - PACKER_BUILD_REGION="us-east-2"
     - PACKER_DEPLOY_REGIONS="us-east-1,us-west-1,us-west-2"
     - PACKER_VERSION="1.4.2"
