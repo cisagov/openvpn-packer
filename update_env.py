@@ -5,11 +5,11 @@ This script uses the GitHub API and the TRAVIS_REPO_SLUG and TRAVIS_TAG environm
 variables to determine if the current build is a pre-release.  It will then output
 shell commands for evaulation based on the pre-release status.
 
-Exit codes:
-    0: This is a pre-release.
-   -1: This is a regular release.
-   -2: Uset environment variables: TRAVIS_REPO_SLUG or TRAVIS_TAG
-   -3: Unable to find the release using the GitHub API
+When running in a Travis CI it is possible that the GitHub API call will be rate
+limited by the shared IP of all Travis users.  Setting the GITHUB_ACCESS_TOKEN
+will cause this script to be limited by the token owner instead.
+
+See: https://developer.github.com/v3/#rate-limiting
 
 Example usage:
     eval $(./update_env.py)
@@ -40,12 +40,12 @@ def main():
     slug = os.getenv("TRAVIS_REPO_SLUG")
     if not slug:
         eprint("TRAVIS_REPO_SLUG not set")
-        sys.exit(-2)
+        sys.exit(-1)
 
     tag = os.getenv("TRAVIS_TAG")
     if not tag:
         eprint("TRAVIS_TAG not set")
-        sys.exit(-2)
+        sys.exit(-1)
 
     try:
         repo = g.get_repo(slug)
@@ -53,20 +53,19 @@ def main():
     except UnknownObjectException:
         # Either the slug or tag were not found.
         eprint(f"Unable to lookup pre-release status for {slug}:{tag}")
-        sys.exit(-3)
+        sys.exit(-1)
 
     if release.prerelease:
-        # This is a prerelease: no DEPLOY_REGIONS.
+        # This is a prerelease: no PACKER_DEPLOY_REGIONS.
         eprint(f"{tag} is a pre-release build.")
         print('export PACKER_DEPLOY_REGIONS=""')
         print('export PACKER_PRE_RELEASE="True"')
-        sys.exit(0)
     else:
-        # This is a regular release: pass DEPLOY_REGIONS through.
+        # This is a regular release: do not modify PACKER_DEPLOY_REGIONS.
         eprint(f"{tag} is NOT a pre-release build.")
-        print(f'export PACKER_DEPLOY_REGIONS="f{os.getenv("PACKER_DEPLOY_REGIONS")}"')
         print('export PACKER_PRE_RELEASE="False"')
-        sys.exit(-1)
+
+    sys.exit(0)
 
 
 if __name__ == "__main__":
