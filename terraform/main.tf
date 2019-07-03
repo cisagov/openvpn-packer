@@ -10,7 +10,7 @@ module "iam_user" {
   ssm_parameters         = ["/cyhy/dev/users", "/ssh/public_keys/*"]
   user_name              = "test-openvpn-packer"
   tags = {
-    Team        = "NCATS OIS - Development"
+    Team        = "CISA - Development"
     Application = "openvpn-packer"
   }
 }
