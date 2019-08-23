@@ -53,6 +53,14 @@ The following environment variables are used by Packer:
 
 - Required
   - `PACKER_BUILD_REGION`: the region to build the build the image in.
+  - `PACKER_KMS_KEY_ID_US_EAST_1`: KMS key ARN or alias for us-east-1 to
+  encrypt the boot volume (to use the region's default KMS key, set this to "")
+  - `PACKER_KMS_KEY_ID_US_EAST_2`: KMS key ARN or alias for us-east-2 to
+  encrypt the boot volume (to use the region's default KMS key, set this to "")
+  - `PACKER_KMS_KEY_ID_US_WEST_1`: KMS key ARN or alias for us-west-1 to
+  encrypt the boot volume (to use the region's default KMS key, set this to "")
+  - `PACKER_KMS_KEY_ID_US_WEST_2`: KMS key ARN or alias for us-west-2 to
+  encrypt the boot volume (to use the region's default KMS key, set this to "")
 - Optional
   - `PACKER_DEPLOY_REGIONS`: list of additional regions to deploy this image.
   - `PACKER_IMAGE_VERSION`: the version tag applied to the final image.
@@ -63,6 +71,10 @@ Here is an example of how to kick off a build:
 ```console
 export PACKER_BUILD_REGION="us-east-2"
 export PACKER_DEPLOY_REGIONS="us-east-1,us-west-1,us-west-2"
+export PACKER_KMS_KEY_ID_US_EAST_1="alias/mykey"
+export PACKER_KMS_KEY_ID_US_EAST_2="alias/mykey"
+export PACKER_KMS_KEY_ID_US_WEST_1="alias/mykey"
+export PACKER_KMS_KEY_ID_US_WEST_2="alias/mykey"
 export PACKER_IMAGE_VERSION=$(./bump_version.sh show)
 export PACKER_PRE_RELEASE="True"
 pip install --requirement requirements-dev.txt
