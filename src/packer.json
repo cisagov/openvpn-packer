@@ -28,13 +28,13 @@
       },
       "source_ami_filter": {
         "filters": {
-          "name": "debian-stretch-hvm-x86_64-gp2-*",
+          "name": "debian-buster-hvm-x86_64-gp2-*",
           "root-device-type": "ebs",
           "virtualization-type": "hvm"
         },
         "most_recent": true,
         "owners": [
-          "379101102735"
+          "563873274798"
         ]
       },
       "ssh_username": "admin",
