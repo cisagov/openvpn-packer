@@ -10,6 +10,7 @@
     - dev_ssh_access
     - persist_journald
     - htop
+    - clamav
 
 - hosts: aws
   name: AWS-specific roles
