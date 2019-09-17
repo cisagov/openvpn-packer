@@ -41,7 +41,7 @@
       "tags": {
         "Application": "OpenVPN",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
-        "OS_Version": "Debian Stretch",
+        "OS_Version": "Debian Buster",
         "Pre_Release": "from-patcher-script",
         "Release": "{{user `image_version`}}",
         "Team": "CISA - Development",
