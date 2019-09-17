@@ -8,6 +8,7 @@
     - python
     - banner
     - dev_ssh_access
+    - freeipa_client
     - persist_journald
     - htop
     - clamav
