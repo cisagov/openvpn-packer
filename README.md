@@ -2,13 +2,12 @@
 
 [![Build Status](https://travis-ci.com/cisagov/openvpn-packer.svg?branch=develop)](https://travis-ci.com/cisagov/openvpn-packer)
 
-This is a generic skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) GitHub
-[packer](https://packer.io) project started.  This skeleton project
-contains [licensing information](LICENSE), as well as [pre-commit
-hooks](https://pre-commit.com) and a [Travis
-CI](https://travis-ci.com) configuration appropriate for the major
-languages that we use.
+This project uses [packer](https://packer.io)
+to create an AMI with [OpenVPN](https://openvpn.net)
+installed and configured for use as a VPN gateway.
+It uses the
+[ansible-role-openvpn](https://github.com/cisagov/ansible-role-openvpn)
+role to install OpenVPN.
 
 ## Pre-requisites ##
 
