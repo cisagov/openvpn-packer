@@ -4,6 +4,13 @@ provider "aws" {
   profile = "cool-users-provisionaccount"
 }
 
+# ProvisionEC2AMICreateRoles AWS provider for the Images account
+provider "aws" {
+  region  = "us-east-1"
+  profile = "cool-images-provisionec2amicreateroles"
+  alias   = "images-ProvisionEC2AMICreateRoles"
+}
+
 # ProvisionParameterStoreReadRoles AWS provider for the Images account
 provider "aws" {
   region  = "us-east-1"
@@ -22,6 +29,7 @@ module "iam_user" {
 
   providers = {
     aws                                         = aws
+    aws.images-ProvisionEC2AMICreateRoles       = aws.images-ProvisionEC2AMICreateRoles
     aws.images-ProvisionParameterStoreReadRoles = aws.images-ProvisionParameterStoreReadRoles
   }
 
