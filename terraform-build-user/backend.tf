@@ -5,6 +5,6 @@ terraform {
     dynamodb_table = "terraform-state-lock"
     profile        = "cool-terraform-backend"
     region         = "us-east-1"
-    key            = "openvpn-packer/terraform-test-user.tfstate"
+    key            = "openvpn-packer/terraform-build-user.tfstate"
   }
 }
