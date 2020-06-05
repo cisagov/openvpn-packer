@@ -10,6 +10,7 @@
   name: dev_ssh_access
 - src: https://github.com/cisagov/ansible-role-freeipa-client
   name: freeipa_client
+  version: bugfix/update-certs-when-rejoining
 - src: https://github.com/cisagov/ansible-role-htop
   name: htop
 - src: https://github.com/cisagov/ansible-role-nvme
