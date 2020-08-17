@@ -8,7 +8,6 @@
   tasks:
     - name: Allow incoming traffic through default TCP ports
       ufw:
-        interface: "localhost"
         proto: tcp
         rule: allow
         to_port: "{{ item }}"
