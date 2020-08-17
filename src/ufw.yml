@@ -6,13 +6,6 @@
   roles:
     - ufw
   tasks:
-    - name: Allow incoming traffic through default TCP ports
-      ufw:
-        proto: tcp
-        rule: allow
-        to_port: "{{ item }}"
-      loop:
-        - "ssh"
     - name: Allow incoming traffic through default UDP ports
       ufw:
         proto: udp
