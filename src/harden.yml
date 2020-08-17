@@ -1,0 +1,7 @@
+---
+- hosts: all
+  name: Hardening tasks
+  become: yes
+  become_method: sudo
+  roles:
+    - harden
