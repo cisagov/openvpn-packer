@@ -10,7 +10,7 @@
   name: dev_ssh_access
 - src: https://github.com/cisagov/ansible-role-freeipa-client
   name: freeipa_client
-- src: konstruktoid.hardening
+- src: https://github.com/cisagov/ansible-role-hardening
   name: harden
 - src: https://github.com/cisagov/ansible-role-htop
   name: htop
