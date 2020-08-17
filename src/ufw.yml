@@ -1,0 +1,23 @@
+---
+- hosts: all
+  name: Install ufw
+  become: yes
+  become_method: sudo
+  roles:
+    - ufw
+  tasks:
+    - name: Allow incoming traffic through default TCP ports
+      ufw:
+        interface: "localhost"
+        proto: tcp
+        rule: allow
+        to_port: "{{ item }}"
+      loop:
+        - "ssh"
+    - name: Allow incoming traffic through default UDP ports
+      ufw:
+        proto: udp
+        rule: allow
+        to_port: "{{ item }}"
+      loop:
+        - "openvpn"
