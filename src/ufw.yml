@@ -6,7 +6,7 @@
   roles:
     - ufw
   tasks:
-    - name: Allow incoming traffic through default UDP ports
+    - name: Allow incoming traffic through UDP ports
       ufw:
         proto: udp
         rule: allow
