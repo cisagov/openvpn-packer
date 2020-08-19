@@ -17,6 +17,7 @@
     - name: Allow ssh only from localhost
       ufw:
         comment: Allow ssh only from localhost
+        direction: in
         interface: lo
         proto: tcp
         rule: allow
