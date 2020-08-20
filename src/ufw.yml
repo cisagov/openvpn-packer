@@ -6,14 +6,8 @@
   roles:
     - ufw
   tasks:
-    - name: Allow incoming traffic through UDP ports
-      ufw:
-        comment: Allow {{ item }} via UDP
-        proto: udp
-        rule: allow
-        to_port: "{{ item }}"
-      loop:
-        - openvpn
+    # The OpenVPN port is already opened in
+    # cisagov/ansible-role-openvpn
     - name: Allow ssh only from localhost
       ufw:
         comment: Allow ssh only from localhost
