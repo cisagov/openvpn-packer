@@ -3,14 +3,26 @@
   hosts: all
   vars:
     outgoing_only_ports:
-      - port: http
-        proto: tcp
-      - port: https
-        proto: tcp
       - port: domain
         proto: tcp
       - port: domain
         proto: udp
+      - port: http
+        proto: tcp
+      - port: https
+        proto: tcp
+      - port: kerberos
+        proto: tcp
+      - port: kerberos
+        proto: udp
+      - port: kpasswd
+        proto: tcp
+      - port: kpasswd
+        proto: udp
+      - port: ldap
+        proto: tcp
+      - port: ldaps
+        proto: tcp
   become: yes
   become_method: sudo
   roles:
