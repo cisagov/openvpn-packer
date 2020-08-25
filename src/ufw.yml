@@ -1,11 +1,28 @@
 ---
-- hosts: all
-  name: Install and configure ufw
+- name: Install and configure ufw
+  hosts: all
+  vars:
+    outgoing_only_ports:
+      - port: http
+        proto: tcp
+      - port: https
+        proto: tcp
+      - port: domain
+        proto: tcp
+      - port: domain
+        proto: udp
   become: yes
   become_method: sudo
   roles:
     - ufw
   tasks:
+    - name: Set default policies to deny
+      ufw:
+        default: deny
+        direction: "{{ item }}"
+      loop:
+        - incoming
+        - outgoing
     # The OpenVPN port is already opened in
     # cisagov/ansible-role-openvpn
     - name: Allow ssh only from localhost
@@ -16,3 +33,11 @@
         proto: tcp
         rule: allow
         to_port: ssh
+    - name: Allow outgoing traffic
+      ufw:
+        comment: Allow {{ item.port }} via {{ item.proto | upper }}
+        direction: out
+        proto: "{{ item.proto }}"
+        rule: allow
+        to_port: "{{ item.port }}"
+      loop: "{{ outgoing_only_ports }}"
