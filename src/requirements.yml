@@ -18,7 +18,6 @@
   name: nvme
 - src: https://github.com/cisagov/ansible-role-openvpn
   name: openvpn
-  version: feature/use-ufw-for-nat
 - src: https://github.com/cisagov/ansible-role-persist-journald
   name: persist_journald
 - src: https://github.com/cisagov/ansible-role-pip
