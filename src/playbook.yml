@@ -11,5 +11,5 @@
 - name: Import AWS playbook
   import_playbook: aws.yml
 
-# - name: Import hardening playbook
-#   import_playbook: harden.yml
+- name: Import hardening playbook
+  import_playbook: harden.yml
