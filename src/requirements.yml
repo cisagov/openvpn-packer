@@ -20,7 +20,6 @@
   name: nvme
 - src: https://github.com/cisagov/ansible-role-openvpn
   name: openvpn
-  version: improvement/do-not-set-default-policy-for-routed-packets
 - src: https://github.com/cisagov/ansible-role-persist-journald
   name: persist_journald
 - src: https://github.com/cisagov/ansible-role-pip
