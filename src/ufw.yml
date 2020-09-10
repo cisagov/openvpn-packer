@@ -38,19 +38,21 @@
             - incoming
             - outgoing
             - routed
-    - name: Configure outgoing traffic
+    - name: Configure incoming traffic
       block:
         # The OpenVPN port is already opened in
         # cisagov/ansible-role-openvpn
-        - name: Allow ssh only from localhost
+        - name: Allow ssh only from lo
           ufw:
-            comment: Allow ssh only from localhost
+            comment: Allow ssh only from lo
             direction: in
             interface: lo
             proto: tcp
             rule: allow
             to_port: ssh
-        - name: Allow outgoing traffic
+    - name: Configure outgoing traffic
+      block:
+        - name: Allow various outgoing traffic
           ufw:
             comment: Allow {{ item.port }} via {{ item.proto | upper }}
             direction: out
@@ -67,11 +69,9 @@
             # This is the special address where AWS hosts NTP
             to_ip: 169.254.169.123
             to_port: ntp
-    - name: Configure incoming traffic
-      block:
         - name: Allow outgoing DHCP traffic
           ufw:
-            comment: Allow DHCP via UDP
+            comment: Allow outgoing DHCP via UDP
             direction: out
             from_port: bootpc
             proto: udp
@@ -89,3 +89,24 @@
             comment: Allow routed packets from anywhere to anywhere
             route: yes
             rule: allow
+    - name: Configure loopback traffic
+      # CIS hardening demands these changes.
+      block:
+        - name: Allow any traffic in or out from lo
+          ufw:
+            comment: Allow any traffic in or out from lo
+            direction: "{{ item }}"
+            interface: lo
+            rule: allow
+          loop:
+            - in
+            - out
+        - name: Deny any traffic in from 127.0.0.0/8 or ::1
+          ufw:
+            comment: Deny any traffic in from 127.0.0.0/8 or ::1
+            direction: in
+            from_ip: "{{ item }}"
+            rule: deny
+          loop:
+            - 127.0.0.0/8
+            - ::1
