@@ -1,18 +1,112 @@
 ---
-- hosts: all
-  name: Install and configure ufw
+- name: Install and configure ufw
+  hosts: all
+  vars:
+    outgoing_only_ports:
+      - port: domain
+        proto: tcp
+      - port: domain
+        proto: udp
+      - port: http
+        proto: tcp
+      - port: https
+        proto: tcp
+      - port: kerberos
+        proto: tcp
+      - port: kerberos
+        proto: udp
+      - port: kpasswd
+        proto: tcp
+      - port: kpasswd
+        proto: udp
+      - port: ldap
+        proto: tcp
+      - port: ldaps
+        proto: tcp
   become: yes
   become_method: sudo
   roles:
     - ufw
   tasks:
-    # The OpenVPN port is already opened in
-    # cisagov/ansible-role-openvpn
-    - name: Allow ssh only from localhost
-      ufw:
-        comment: Allow ssh only from localhost
-        direction: in
-        interface: lo
-        proto: tcp
-        rule: allow
-        to_port: ssh
+    - name: Configure default policies
+      block:
+        - name: Set all default policies to deny
+          ufw:
+            default: deny
+            direction: "{{ item }}"
+          loop:
+            - incoming
+            - outgoing
+            - routed
+    - name: Configure incoming traffic
+      block:
+        # The OpenVPN port is already opened in
+        # cisagov/ansible-role-openvpn
+        - name: Allow ssh only from lo
+          ufw:
+            comment: Allow ssh only from lo
+            direction: in
+            interface: lo
+            proto: tcp
+            rule: allow
+            to_port: ssh
+    - name: Configure outgoing traffic
+      block:
+        - name: Allow various outgoing traffic
+          ufw:
+            comment: Allow {{ item.port }} via {{ item.proto | upper }}
+            direction: out
+            proto: "{{ item.proto }}"
+            rule: allow
+            to_port: "{{ item.port }}"
+          loop: "{{ outgoing_only_ports }}"
+        - name: Allow outgoing NTP traffic to AWS
+          ufw:
+            comment: Allow NTP via UDP to AWS
+            direction: out
+            proto: udp
+            rule: allow
+            # This is the special address where AWS hosts NTP
+            to_ip: 169.254.169.123
+            to_port: ntp
+        - name: Allow outgoing DHCP traffic
+          ufw:
+            comment: Allow outgoing DHCP via UDP
+            direction: out
+            from_port: bootpc
+            proto: udp
+            rule: allow
+            to_port: bootps
+    - name: Configure routed/forwarded traffic
+      block:
+        # CIS hardening demands that the default policy for routed
+        # packets be deny, but this rule allows all routed packets as
+        # if the default policy were allow.  I'm following the letter
+        # of the law, not the intent.  Next thing you know I'll be
+        # chasing ambulances.  :(
+        - name: Allow routed packets from anywhere to anywhere
+          ufw:
+            comment: Allow routed packets from anywhere to anywhere
+            route: yes
+            rule: allow
+    - name: Configure loopback traffic
+      # CIS hardening demands these changes.
+      block:
+        - name: Allow any traffic in or out from lo
+          ufw:
+            comment: Allow any traffic in or out from lo
+            direction: "{{ item }}"
+            interface: lo
+            rule: allow
+          loop:
+            - in
+            - out
+        - name: Deny any traffic in from 127.0.0.0/8 or ::1
+          ufw:
+            comment: Deny any traffic in from 127.0.0.0/8 or ::1
+            direction: in
+            from_ip: "{{ item }}"
+            rule: deny
+          loop:
+            - 127.0.0.0/8
+            - ::1
