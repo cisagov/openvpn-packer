@@ -5,6 +5,3 @@
   become_method: sudo
   roles:
     - role: harden
-      # vars:
-      #   sshd_admin_net:
-      #     - 127.0.0.1/32
