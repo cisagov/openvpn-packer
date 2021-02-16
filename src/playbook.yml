@@ -8,6 +8,9 @@
 - name: Import OpenVPN playbook
   import_playbook: openvpn.yml
 
+- name: Import VENOM playbook
+  import_playbook: venom.yml
+
 - name: Import AWS playbook
   import_playbook: aws.yml
 

@@ -33,3 +33,5 @@
   name: ufw
 - src: https://github.com/cisagov/ansible-role-upgrade
   name: upgrade
+- src: https://github.com/cisagov/ansible-role-venom-tanium-client
+  name: venom_tanium_client
