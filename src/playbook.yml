@@ -1,18 +1,18 @@
 ---
 - name: Import base image playbook
-  import_playbook: base.yml
+  ansible.builtin.import_playbook: base.yml
 
 - name: Import UFW playbook
-  import_playbook: ufw.yml
+  ansible.builtin.import_playbook: ufw.yml
 
 - name: Import OpenVPN playbook
-  import_playbook: openvpn.yml
+  ansible.builtin.import_playbook: openvpn.yml
 
 - name: Import VENOM playbook
-  import_playbook: venom.yml
+  ansible.builtin.import_playbook: venom.yml
 
 - name: Import AWS playbook
-  import_playbook: aws.yml
+  ansible.builtin.import_playbook: aws.yml
 
 - name: Import hardening playbook
-  import_playbook: harden.yml
+  ansible.builtin.import_playbook: harden.yml

@@ -32,7 +32,7 @@
         third_party_bucket_name: "{{ build_bucket }}"
   tasks:
     - name: Configure UFW for VENOM traffic
-      ufw:
+      community.general.ufw:
         comment: >
           Allow {{ item.port }} {{ item.direction }} via
           {{ item.proto | upper }}
