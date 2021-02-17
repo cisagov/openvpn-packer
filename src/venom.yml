@@ -30,6 +30,9 @@
     - role: venom_tanium_client
       vars:
         third_party_bucket_name: "{{ build_bucket }}"
+    - role: venom_nessus_agent
+      vars:
+        third_party_bucket_name: "{{ build_bucket }}"
   tasks:
     - name: Configure UFW for VENOM traffic
       community.general.ufw:
