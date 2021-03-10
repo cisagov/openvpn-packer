@@ -9,8 +9,13 @@ module "iam_user" {
     aws.images-staging-ssm    = aws.images-staging-ssm
   }
 
-  ssm_parameters = ["/cyhy/dev/users", "/openvpn/server/*", "/ssh/public_keys/*", "/venom/tanium_hostname"]
-  user_name      = "build-openvpn-packer"
+  ssm_parameters = [
+    "/cdm/tanium_hostname",
+    "/cyhy/dev/users",
+    "/openvpn/server/*",
+    "/ssh/public_keys/*",
+  ]
+  user_name = "build-openvpn-packer"
   tags = {
     Team        = "CISA - Development"
     Application = "openvpn-packer"
