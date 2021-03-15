@@ -29,6 +29,10 @@
   roles:
     - role: cdm_tanium_client
       vars:
+        hostname: "{{ lookup('aws_ssm', '/cdm/nessus_hostname') }}"
+        key: "{{ lookup('aws_ssm', '/cdm/nessus_key') }}"
+        nessus_groups: COOL_Deb_10
+        port: "{{ lookup('aws_ssm', '/cdm/nessus_port') }}"
         server_name: "{{ lookup('aws_ssm', '/cdm/tanium_hostname') }}"
         third_party_bucket_name: "{{ build_bucket }}"
     - role: cdm_nessus_agent
