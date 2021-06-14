@@ -16,10 +16,6 @@ module "iam_user" {
     "/ssh/public_keys/*",
   ]
   user_name = "build-openvpn-packer"
-  tags = {
-    Team        = "CISA - Development"
-    Application = "openvpn-packer"
-  }
 }
 
 # Attach 3rd party S3 bucket read-only policy from
