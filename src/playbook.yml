@@ -11,9 +11,6 @@
 - name: Import OpenVPN playbook
   ansible.builtin.import_playbook: openvpn.yml
 
-- name: Import CISA CDM playbook
-  ansible.builtin.import_playbook: cdm.yml
-
 - name: Import AWS playbook
   ansible.builtin.import_playbook: aws.yml
 
