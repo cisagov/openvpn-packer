@@ -7,10 +7,6 @@
   name: backports
 - src: https://github.com/cisagov/ansible-role-banner
   name: banner
-- src: https://github.com/cisagov/ansible-role-cdm-nessus-agent
-  name: cdm_nessus_agent
-- src: https://github.com/cisagov/ansible-role-cdm-tanium-client
-  name: cdm_tanium_client
 - src: https://github.com/cisagov/ansible-role-chrony-aws
   name: chrony_aws
 - src: https://github.com/cisagov/ansible-role-clamav
