@@ -18,7 +18,6 @@
   name: dev_ssh_access
 - src: https://github.com/cisagov/ansible-role-freeipa-client
   name: freeipa_client
-  version: bugfix/amend-two-files-for-bullseye
 - src: https://github.com/cisagov/ansible-role-hardening
   name: harden
   version: bugfix/timesyncd-config
