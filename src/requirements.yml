@@ -19,7 +19,6 @@
   name: freeipa_client
 - src: https://github.com/cisagov/ansible-role-hardening
   name: harden
-  version: bugfix/timesyncd-config
 - src: https://github.com/cisagov/ansible-role-htop
   name: htop
 - src: https://github.com/cisagov/ansible-role-nvme
