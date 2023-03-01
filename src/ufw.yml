@@ -42,11 +42,16 @@
       block:
         # The OpenVPN port is already opened in
         # cisagov/ansible-role-openvpn
-        - name: Allow ssh only from lo
+        #
+        # I'd like to allow ssh only on lo here, but that seems to
+        # lock out any Packer provisioners that follow the one that
+        # runs this Ansible code.  In any event, the AWS security
+        # groups and network ACLs for the OpenVPN instance do not
+        # allow incoming traffic on port 22, so we should be OK.
+        - name: Allow ssh
           community.general.ufw:
-            comment: Allow ssh only from lo
+            comment: Allow ssh
             direction: in
-            interface: lo
             proto: tcp
             rule: allow
             to_port: ssh
