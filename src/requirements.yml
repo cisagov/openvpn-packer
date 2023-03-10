@@ -21,6 +21,7 @@
   name: nvme
 - src: https://github.com/cisagov/ansible-role-openvpn
   name: openvpn
+  version: improvement/fix_extra_pip_flag
 - src: https://github.com/cisagov/ansible-role-persist-journald
   name: persist_journald
 - src: https://github.com/cisagov/ansible-role-pip
