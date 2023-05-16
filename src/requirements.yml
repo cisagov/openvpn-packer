@@ -13,7 +13,6 @@
   name: cloudwatch_agent
 - src: https://github.com/cisagov/ansible-role-crowdstrike
   name: crowdstrike
-  version: first-commits
 - src: https://github.com/cisagov/ansible-role-freeipa-client
   name: freeipa_client
 - src: https://github.com/cisagov/ansible-role-hardening
