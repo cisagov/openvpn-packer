@@ -1,0 +1,26 @@
+---
+- hosts: all
+  name: Configure for the CISA CDM environment
+  become: yes
+  become_method: sudo
+  roles:
+    - role: crowdstrike
+      vars:
+        third_party_bucket_name: "{{ build_bucket }}"
+  tasks:
+    - name: Configure UFW for CISA CDM traffic
+      community.general.ufw:
+        comment: >
+          Allow {{ item.port }} {{ item.direction }} via
+          {{ item.proto | upper }}
+        direction: "{{ item.direction }}"
+        proto: "{{ item.proto }}"
+        rule: allow
+        to_port: "{{ item.port }}"
+      loop: "{{ ports }}"
+      vars:
+        ports:
+          # CrowdStrike
+          - direction: out
+            port: 443
+            proto: tcp
