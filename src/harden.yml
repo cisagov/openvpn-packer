@@ -3,5 +3,7 @@
   name: Hardening tasks
   become: yes
   become_method: sudo
-  roles:
-    - role: harden
+  tasks:
+    - name: Hardening
+      ansible.builtin.include_role:
+        name: harden
