@@ -3,5 +3,7 @@
   name: Install OpenVPN
   become: yes
   become_method: sudo
-  roles:
-    - openvpn
+  tasks:
+    - name: Install OpenVPN
+      ansible.builtin.include_role:
+        name: openvpn
