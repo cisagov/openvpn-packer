@@ -8,7 +8,7 @@
       ansible.builtin.include_role:
         name: crowdstrike
       vars:
-        third_party_bucket_name: "{{ build_bucket }}"
+        crowdstrike_third_party_bucket_name: "{{ build_bucket }}"
     - name: Configure UFW for CISA CDM traffic
       community.general.ufw:
         comment: >
