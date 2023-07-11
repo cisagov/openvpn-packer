@@ -2,13 +2,13 @@
 - hosts: all
   name: Configure for the CISA CDM environment
   become: yes
-  become_method: sudo
+  become_method: ansible.builtin.sudo
   tasks:
     - name: Install CrowdStrike
       ansible.builtin.include_role:
         name: crowdstrike
       vars:
-        third_party_bucket_name: "{{ build_bucket }}"
+        crowdstrike_third_party_bucket_name: "{{ build_bucket }}"
     - name: Configure UFW for CISA CDM traffic
       community.general.ufw:
         comment: >
