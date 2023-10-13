@@ -4,7 +4,24 @@
   become: yes
   become_method: ansible.builtin.sudo
   tasks:
-    - name: Install CrowdStrike
+    - name: Install CDM Tanium client
+      ansible.builtin.include_role:
+        name: cdm_tanium
+      vars:
+        cdm_tanium_server_name: "{{ lookup('aws_ssm', '/cdm/tanium_hostname') }}"
+        cdm_tanium_third_party_bucket_name: "{{ build_bucket }}"
+    - name: Install CDM Nessus agent
+      ansible.builtin.include_role:
+        name: cdm_nessus_agent
+      vars:
+        cdm_nessus_agent_third_party_bucket_name: "{{ build_bucket }}"
+    # The Python code that will be run by cloud-init to link the
+    # Nessus Agent will require boto3
+    - name: Install boto3
+      ansible.builtin.package:
+        name:
+          - python3-boto3
+    - name: Install CDM CrowdStrike
       ansible.builtin.include_role:
         name: crowdstrike
       vars:
@@ -24,4 +41,25 @@
           # CrowdStrike
           - direction: out
             port: 443
+            proto: tcp
+          # Tanium
+          - direction: in
+            port: 17472
+            proto: tcp
+          - direction: out
+            port: 17472
+            proto: tcp
+          # Tanium threat response
+          - direction: in
+            port: 17475
+            proto: tcp
+          - direction: out
+            port: 17475
+            proto: tcp
+          # Tenable
+          - direction: in
+            port: 8834
+            proto: tcp
+          - direction: out
+            port: 8834
             proto: tcp
