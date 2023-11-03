@@ -23,7 +23,7 @@
         proto: tcp
       - port: ldaps
         proto: tcp
-  become: yes
+  become: true
   become_method: ansible.builtin.sudo
   tasks:
     - name: Install UFW
@@ -93,7 +93,7 @@
         - name: Allow routed packets from anywhere to anywhere
           community.general.ufw:
             comment: Allow routed packets from anywhere to anywhere
-            route: yes
+            route: true
             rule: allow
     - name: Configure loopback traffic
       # CIS hardening demands these changes.
