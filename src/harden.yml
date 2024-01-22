@@ -4,6 +4,31 @@
   become: true
   become_method: ansible.builtin.sudo
   tasks:
+    - name: >-
+        Download issue and motd files from cisagov/ansible-role-banner
+      ansible.builtin.get_url:
+        dest: /tmp/{{ item | basename }}
+        mode: "0644"
+        url: "{{ item }}"
+      delegate_to: localhost
+      loop:
+        - https://raw.githubusercontent.com/cisagov/ansible-role-banner/develop/files/issue
+        - https://raw.githubusercontent.com/cisagov/ansible-role-banner/develop/files/motd
     - name: Harden system
-      ansible.builtin.include_role:
+      # This role is forked from konstruktoid/ansible-role-hardening
+      # and we do not control the names of the role variables.  This
+      # is the reason for the noqa comment.
+      ansible.builtin.include_role:  # noqa var-naming[no-role-prefix]
         name: harden
+      vars:
+        # Point the role to the correct issue and motd templates
+        issue_template: /tmp/issue
+        motd_template: /tmp/motd
+    - name: Delete local copies of issue and motd files
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      delegate_to: localhost
+      loop:
+        - /tmp/issue
+        - /tmp/motd
