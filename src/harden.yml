@@ -24,3 +24,11 @@
         # Point the role to the correct issue and motd templates
         issue_template: /tmp/issue
         motd_template: /tmp/motd
+    - name: Delete local copies of issue and motd files
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      delegate_to: localhost
+      loop:
+        - /tmp/issue
+        - /tmp/motd
