@@ -20,16 +20,15 @@ roles:
     src: https://github.com/cisagov/ansible-role-crowdstrike
   - name: freeipa_client
     src: https://github.com/cisagov/ansible-role-freeipa-client
-  - name: harden
-    src: https://github.com/cisagov/ansible-role-hardening-2
+  - name: konstruktoid.hardening
+    src: https://github.com/konstruktoid/ansible-role-hardening
+    version: v2.0.4
   - name: htop
     src: https://github.com/cisagov/ansible-role-htop
   - name: nvme
     src: https://github.com/cisagov/ansible-role-nvme
   - name: openvpn
     src: https://github.com/cisagov/ansible-role-openvpn
-  - name: persist_journald
-    src: https://github.com/cisagov/ansible-role-persist-journald
   - name: pip
     src: https://github.com/cisagov/ansible-role-pip
   - name: python
@@ -40,5 +39,3 @@ roles:
     src: https://github.com/cisagov/ansible-role-systemd-resolved
   - name: ufw
     src: https://github.com/cisagov/ansible-role-ufw
-  - name: upgrade
-    src: https://github.com/cisagov/ansible-role-upgrade

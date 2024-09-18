@@ -15,15 +15,61 @@
         - https://raw.githubusercontent.com/cisagov/ansible-role-banner/develop/files/issue
         - https://raw.githubusercontent.com/cisagov/ansible-role-banner/develop/files/motd
     - name: Harden system
-      # This role is forked from konstruktoid/ansible-role-hardening
-      # and we do not control the names of the role variables.  This
+      # We do not control the names of the role variables.  This
       # is the reason for the noqa comment.
-      ansible.builtin.include_role:  # noqa var-naming[no-role-prefix]
-        name: harden
+      ansible.builtin.import_role:  # noqa var-naming[no-role-prefix]
+        name: konstruktoid.hardening
       vars:
-        # Point the role to the correct issue and motd templates
+        automatic_updates: false
+        fallback_ntp:
+          # AWS-provided NTP server
+          - 169.254.169.123
+        # Use the COOL issue template
         issue_template: /tmp/issue
+        journald_storage: persistent
+        manage_timesyncd: false
+        manage_resolved: false
+        manage_ufw: false
+        # Use the COOL MOTD template
         motd_template: /tmp/motd
+        ntp_servers:
+          # AWS-provided NTP server
+          - 169.254.169.123
+        sshd_admin_net:
+          - "0.0.0.0/0"
+        system_upgrade: false
+        packages_blocklist:
+          - apport*
+          - autofs
+          - avahi*
+          - avahi-*
+          - beep
+          - git
+          - pastebinit
+          - popularity-contest
+          - prelink
+          - rpcbind
+          - rsh*
+          - rsync
+          - talk*
+          - telnet*
+          - tftp*
+          - tuned
+          - whoopsie
+          - xinetd
+          - yp-tools
+          - ypbind
+        packages_debian:
+          - auditd
+          - cracklib-runtime
+          - libpam-pwquality
+        packages_ubuntu: []
+        pass_max_days: 365
+        pass_min_days: 7
+        sshd_max_sessions: 4
+        suid_sgid_permissions: false
+        # Necessary for FreeIPA
+        umask_value: "027"
     - name: Delete local copies of issue and motd files
       ansible.builtin.file:
         path: "{{ item }}"
