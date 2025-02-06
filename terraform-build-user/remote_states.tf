@@ -35,41 +35,50 @@ data "terraform_remote_state" "images" {
 }
 
 data "terraform_remote_state" "ansible_role_cdm_certificates" {
+  # The only supported CDM environment is production.
+  count = terraform.workspace == "production" ? 1 : 0
+
   backend = "s3"
 
   config = {
-    encrypt        = true
     bucket         = "cisa-cool-terraform-state"
     dynamodb_table = "terraform-state-lock"
+    encrypt        = true
+    key            = "ansible-role-cdm-certificates/terraform.tfstate"
     profile        = "cool-terraform-backend"
     region         = "us-east-1"
-    key            = "ansible-role-cdm-certificates/terraform.tfstate"
   }
 }
 
 data "terraform_remote_state" "ansible_role_cdm_nessus_agent" {
+  # The only supported CDM environment is production.
+  count = terraform.workspace == "production" ? 1 : 0
+
   backend = "s3"
 
   config = {
-    encrypt        = true
     bucket         = "cisa-cool-terraform-state"
     dynamodb_table = "terraform-state-lock"
+    encrypt        = true
+    key            = "ansible-role-cdm-nessus-agent/terraform.tfstate"
     profile        = "cool-terraform-backend"
     region         = "us-east-1"
-    key            = "ansible-role-cdm-nessus-agent/terraform.tfstate"
   }
 }
 
 data "terraform_remote_state" "ansible_role_crowdstrike" {
+  # The only supported CDM environment is production.
+  count = terraform.workspace == "production" ? 1 : 0
+
   backend = "s3"
 
   config = {
-    encrypt        = true
     bucket         = "cisa-cool-terraform-state"
     dynamodb_table = "terraform-state-lock"
+    encrypt        = true
+    key            = "ansible-role-crowdstrike/terraform.tfstate"
     profile        = "cool-terraform-backend"
     region         = "us-east-1"
-    key            = "ansible-role-crowdstrike/terraform.tfstate"
   }
 }
 
