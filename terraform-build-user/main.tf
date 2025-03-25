@@ -11,6 +11,7 @@ module "iam_user" {
     "/cyhy/dev/users",
     "/openvpn/server/*",
     "/ssh/public_keys/*",
+    "/third_party_bucket_name",
   ]
   user_name = "build-openvpn-packer"
 }
