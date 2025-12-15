@@ -1,6 +1,8 @@
 # openvpn-packer 🚪📦 #
 
 [![GitHub Build Status](https://github.com/cisagov/openvpn-packer/workflows/build/badge.svg)](https://github.com/cisagov/openvpn-packer/actions)
+[![License](https://img.shields.io/github/license/cisagov/openvpn-packer)](https://spdx.org/licenses/)
+[![CodeQL](https://github.com/cisagov/openvpn-packer/workflows/CodeQL/badge.svg)](https://github.com/cisagov/openvpn-packer/actions/workflows/codeql-analysis.yml)
 
 This project uses [packer](https://packer.io)
 to create an AMI with [OpenVPN](https://openvpn.net)
