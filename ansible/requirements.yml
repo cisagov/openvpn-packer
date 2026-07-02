@@ -43,7 +43,6 @@ roles:
     src: https://github.com/cisagov/ansible-role-freeipa-client
   - name: harden
     src: https://github.com/cisagov/ansible-role-hardening-2
-    version: improvement/pull-some-upstream-changes-into-sudo-tasks
   - name: htop
     src: https://github.com/cisagov/ansible-role-htop
   - name: nvme
