@@ -1,7 +1,0 @@
----
-- name: Install create-ipa-initial-seeding-script.sh
-  ansible.builtin.get_url:
-    dest: /usr/local/sbin
-    mode: u+rx,g=,o=
-    url: >
-      https://raw.githubusercontent.com/cisagov/cool-users/master/create-ipa-initial-seeding-script.sh
