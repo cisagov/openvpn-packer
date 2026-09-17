@@ -1,9 +1,0 @@
----
-- name: Configure for automated security updates
-  hosts: all
-  become: true
-  become_method: ansible.builtin.sudo
-  tasks:
-    - name: Set up automated security updates
-      ansible.builtin.include_role:
-        name: automated_security_updates
