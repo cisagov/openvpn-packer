@@ -49,7 +49,6 @@ roles:
     src: https://github.com/cisagov/ansible-role-nvme
   - name: openvpn
     src: https://github.com/cisagov/ansible-role-openvpn
-    version: feature/add-code-to-add-certmap-permissions
   - name: persist_journald
     src: https://github.com/cisagov/ansible-role-persist-journald
   - name: pip
